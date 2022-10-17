@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Community\StoreRequest;
+use App\Http\Requests\Backend\Community\UpdateRequest;
 use App\Models\Community;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -44,13 +45,12 @@ class CommunityController extends Controller
         $data = [
             'user_id' => auth()->id(),
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
             'description' => $request->description,
         ];
 
         $newCommunity = Community::create($data);
 
-        return to_route("communities.index")->with('success', 'Successfully created new community.');
+        return to_route('communities.index');
     }
 
     /**
@@ -61,7 +61,8 @@ class CommunityController extends Controller
      */
     public function show($id)
     {
-        //
+        $community = Community::findOrFail($id);
+        return Inertia::render('Communities/Show', compact('community'));
     }
 
     /**
@@ -72,19 +73,23 @@ class CommunityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $community = Community::findOrFail($id);
+        return Inertia::render('Communities/Edit', compact('community'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Backend\Community\UpdateRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $community = Community::findOrFail($id);
+        $community->update(['name' => $request->name, 'description' => $request->description]);
+
+        return to_route('communities.index');
     }
 
     /**

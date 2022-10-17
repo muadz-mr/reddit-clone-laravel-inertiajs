@@ -1,5 +1,6 @@
 <script setup>
 import PrimaryLink from "@/Components/PrimaryLink.vue";
+import { Link } from "@inertiajs/inertia-vue3";
 
 const props = defineProps([
     "topButtonTitle",
@@ -7,6 +8,7 @@ const props = defineProps([
     "title",
     "description",
     "items",
+    "actionLinks",
 ]);
 </script>
 
@@ -30,9 +32,7 @@ const props = defineProps([
         </div>
         <div class="mt-8 flex flex-col">
             <div class="-my-2 overflow-x-auto">
-                <div
-                    class="inline-block min-w-full py-2 align-middle px-1"
-                >
+                <div class="inline-block min-w-full py-2 align-middle px-1">
                     <div
                         class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg"
                     >
@@ -85,12 +85,12 @@ const props = defineProps([
                                     <td
                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                                     >
-                                        <a
-                                            href="#"
+                                        <Link
+                                            :href="route('communities.edit', item.id)"
                                             class="text-indigo-600 hover:text-indigo-900"
                                             >Edit<span class="sr-only"
                                                 >, {{ item.name }}</span
-                                            ></a
+                                            ></Link
                                         >
                                     </td>
                                 </tr>
