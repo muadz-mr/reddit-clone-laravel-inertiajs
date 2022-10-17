@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Community extends Model
+class Community extends SlugModel
 {
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'name',

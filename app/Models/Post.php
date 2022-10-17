@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class Post extends SlugModel
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
+
+    protected $slugFromColumn = 'title';
 
     protected $fillable = [
         'user_id',
