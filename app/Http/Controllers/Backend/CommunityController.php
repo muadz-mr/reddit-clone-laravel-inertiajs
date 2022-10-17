@@ -20,7 +20,7 @@ class CommunityController extends Controller
     {
         $communities = Community::all();
 
-        return Inertia::render('Communities/Index', ['communities' => $communities]);
+        return Inertia::render('Communities/Index', compact('communities'));
     }
 
     /**
