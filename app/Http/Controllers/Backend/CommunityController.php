@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Community\StoreRequest;
 use App\Http\Requests\Backend\Community\UpdateRequest;
 use App\Models\Community;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -19,7 +20,13 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::all();
+        $communities = Community::paginate(2)->through(fn ($community) => [
+            'id' => $community->id,
+            'name' => $community->name,
+            'slug' => $community->slug,
+            'description' => $community->description,
+            'created_at' => Carbon::parse($community->created_at)->format('D, d M Y H:i:s'),
+        ]);
 
         return Inertia::render('Communities/Index', compact('communities'));
     }

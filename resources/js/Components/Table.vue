@@ -1,5 +1,7 @@
 <script setup>
 import PrimaryLink from "@/Components/PrimaryLink.vue";
+import Pagination from "@/Components/Pagination.vue";
+
 import { Link } from "@inertiajs/inertia-vue3";
 
 const props = defineProps([
@@ -9,6 +11,7 @@ const props = defineProps([
     "description",
     "items",
     "actionLinks",
+    "pagination",
 ]);
 </script>
 
@@ -59,6 +62,12 @@ const props = defineProps([
                                     </th>
                                     <th
                                         scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
+                                        Created At
+                                    </th>
+                                    <th
+                                        scope="col"
                                         class="relative px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                     >
                                         Actions
@@ -84,7 +93,12 @@ const props = defineProps([
                                         {{ item.description }}
                                     </td>
                                     <td
-                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                                    >
+                                        {{ item.created_at }}
+                                    </td>
+                                    <td
+                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6"
                                     >
                                         <Link
                                             :href="
@@ -93,7 +107,7 @@ const props = defineProps([
                                                     item.id
                                                 )
                                             "
-                                            class="text-indigo-600 hover:text-indigo-900"
+                                            class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                         >
                                             Edit
                                         </Link>
@@ -104,7 +118,7 @@ const props = defineProps([
                                                     item.id
                                                 )
                                             "
-                                            class="text-red-600 hover:text-red-900 ml-4"
+                                            class="text-red-600 hover:text-red-900 ml-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                             method="delete"
                                             as="button"
                                             type="button"
@@ -118,6 +132,7 @@ const props = defineProps([
                     </div>
                 </div>
             </div>
+            <Pagination :pagination="pagination" />
         </div>
     </div>
 </template>
