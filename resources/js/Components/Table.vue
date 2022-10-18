@@ -59,9 +59,10 @@ const props = defineProps([
                                     </th>
                                     <th
                                         scope="col"
-                                        class="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                                        class="relative px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                     >
-                                        <span class="sr-only">Edit</span>
+                                        Actions
+                                        <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -86,12 +87,30 @@ const props = defineProps([
                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
                                     >
                                         <Link
-                                            :href="route('communities.edit', item.id)"
+                                            :href="
+                                                route(
+                                                    'communities.edit',
+                                                    item.id
+                                                )
+                                            "
                                             class="text-indigo-600 hover:text-indigo-900"
-                                            >Edit<span class="sr-only"
-                                                >, {{ item.name }}</span
-                                            ></Link
                                         >
+                                            Edit
+                                        </Link>
+                                        <Link
+                                            :href="
+                                                route(
+                                                    'communities.destroy',
+                                                    item.id
+                                                )
+                                            "
+                                            class="text-red-600 hover:text-red-900 ml-4"
+                                            method="delete"
+                                            as="button"
+                                            type="button"
+                                        >
+                                            Delete
+                                        </Link>
                                     </td>
                                 </tr>
                             </tbody>

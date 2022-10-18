@@ -100,6 +100,9 @@ class CommunityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $community = Community::findOrFail($id);
+        $community->delete();
+
+        return back()->with('message', "Community deleted successfully.");
     }
 }
