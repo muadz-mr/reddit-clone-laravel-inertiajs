@@ -13,7 +13,12 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div class="relative">
-        <NotificationToast v-if="$page.props.flash.message" type="success" :textSmall="$page.props.flash.message" :textNormal="$page.props.flash.message"/>
+        <NotificationToast
+            v-if="$page.props.flash.message"
+            type="success"
+            :textSmall="$page.props.flash.message"
+            :textNormal="$page.props.flash.message"
+        />
 
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">

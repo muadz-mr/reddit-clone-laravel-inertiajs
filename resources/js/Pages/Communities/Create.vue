@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
 import { Head, useForm } from "@inertiajs/inertia-vue3";
@@ -11,6 +12,10 @@ const form = useForm({
     name: "",
     description: "",
 });
+
+const goBack = () => {
+    history.back();
+};
 
 const submit = () => {
     form.post(route("communities.store"), {
@@ -74,6 +79,28 @@ const submit = () => {
                             </div>
 
                             <div class="flex items-center justify-end mt-4">
+                                <SecondaryButton
+                                    type="button"
+                                    class="ml-4"
+                                    :class="{ 'opacity-25': form.processing }"
+                                    :disabled="form.processing"
+                                    @click="goBack"
+                                >
+                                    <svg
+                                        class="w-3 h-3 mr-2"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+                                        ></path>
+                                    </svg>
+                                    Back
+                                </SecondaryButton>
                                 <PrimaryButton
                                     class="ml-4"
                                     :class="{ 'opacity-25': form.processing }"
