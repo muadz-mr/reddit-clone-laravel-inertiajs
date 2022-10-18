@@ -50,7 +50,7 @@ class CommunityController extends Controller
 
         $newCommunity = Community::create($data);
 
-        return to_route('communities.index');
+        return to_route('communities.index')->with('message', "Community created successfully.");
     }
 
     /**
@@ -89,7 +89,7 @@ class CommunityController extends Controller
         $community = Community::findOrFail($id);
         $community->update(['name' => $request->name, 'description' => $request->description]);
 
-        return to_route('communities.index');
+        return to_route('communities.index')->with('message', "Community updated successfully.");
     }
 
     /**
